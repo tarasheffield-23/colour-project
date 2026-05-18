@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mitti Colourway — Palette Explorer</title>
+<style>
+/* ─── FIXED REFERENCE TOKENS ─────────────────────────────────────────── */
+:root {
+  --n50:#FCFBFB;--n100:#F6F4F4;--n200:#EAEAEA;--n300:#D6D4D3;--n400:#BCBAB8;
+  --n500:#94918F;--n600:#666260;--n700:#454140;--n800:#2C2724;--n900:#1C1714;
+  --m50:#F2FAF4;--m100:#D0E9D8;--m200:#A5D4B4;--m300:#6EB888;--m400:#3A9E5A;
+  --m500:#257C42;--m600:#1A5A30;--m700:#144524;--m800:#0E3019;--m900:#091D0F;
+
+  /* ── Variant slots ── */
+  --ve50:#FDF3F0;--ve100:#F9D8D0;--ve200:#F2B0A0;--ve300:#E87860;--ve400:#D03820;
+  --ve500:#B02010;--ve600:#8E1608;--ve700:#701106;--ve800:#520D04;--ve900:#360802;
+  --vp50:#F4F4FC;--vp100:#E6E4F8;--vp200:#C8C4F2;--vp300:#A49EE8;--vp400:#6E68DA;
+  --vp500:#4A42C8;--vp600:#3830A0;--vp700:#2A2478;--vp800:#1C1852;--vp900:#100E30;
+  --vg50:#F2FAF4;--vg100:#D0E9D8;--vg200:#A5D4B4;--vg300:#6EB888;--vg400:#3A9E5A;
+  --vg500:#257C42;--vg600:#1A5A30;--vg700:#144524;--vg800:#0E3019;--vg900:#091D0F;
+  --vn50:#FCFBFB;--vn100:#F6F4F4;--vn200:#EAEAEA;--vn300:#D6D4D3;--vn400:#BCBAB8;
+  --vn500:#94918F;--vn600:#666260;--vn700:#454140;--vn800:#2C2724;--vn900:#1C1714;
+  --vb50:#F0F5FB;--vb100:#CCE0F2;--vb200:#98C4E8;--vb300:#5898D8;--vb400:#2272C0;
+  --vb500:#1568A4;--vb600:#104C7E;--vb700:#0A3860;--vb800:#062448;--vb900:#031430;
+  --va50:#FDF8F0;--va100:#F8E4C0;--va200:#F0C880;--va300:#E0A030;--va400:#C47818;
+  --va500:#A86010;--va600:#844C08;--va700:#643804;--va800:#4A2804;--va900:#301A02;
+
+  /* ── Semantic slots (light mode defaults) ── */
+  --ui-accent:    var(--vp500);--ui-acc-soft: var(--vp50); --ui-acc-text: var(--vp700);--ui-acc-bar:  var(--vp400);
+  --ui-danger:    var(--ve500);--ui-dan-soft: var(--ve50); --ui-dan-text: var(--ve600);--ui-dan-bar:  var(--ve400);
+  --ui-pos:       var(--vg500);--ui-pos-soft: var(--vg50); --ui-pos-bar:  var(--vg400);
+  --ui-blue:      var(--vb500);--ui-blue-soft:var(--vb50); --ui-blue-text:var(--vb700);--ui-blue-bar: var(--vb400);
+  --ui-amber:     var(--va500);--ui-amb-soft: var(--va50); --ui-amb-text: var(--va700);--ui-amb-bar:  var(--va400);
+
+  /* ── Layout tokens — cascade through neutral variant ── */
+  --bg:       var(--vn50);
+  --bg-card:  #FFFFFF;
+  --bg-raise: var(--vn100);
+  --brd:      var(--vn200);
+  --brd-s:    var(--vn300);
+  --tx:       var(--vn900);
+  --tx-s:     var(--vn600);
+  --tx-t:     var(--vn500);
+}
+
+/* ─── DARK MODE ───────────────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --bg:       var(--vn900);
+  --bg-card:  var(--vn800);
+  --bg-raise: color-mix(in srgb, var(--vn800) 60%, var(--vn900));
+  --brd:      var(--vn700);
+  --brd-s:    var(--vn600);
+  --tx:       var(--vn50);
+  --tx-s:     var(--vn300);
+  --tx-t:     var(--vn500);
+  /* Semantic — lighter steps for dark bg */
+  --ui-accent:    var(--vp400);--ui-acc-soft: var(--vp800);--ui-acc-text: var(--vp300);--ui-acc-bar:  var(--vp400);
+  --ui-danger:    var(--ve400);--ui-dan-soft: var(--ve800);--ui-dan-text: var(--ve300);--ui-dan-bar:  var(--ve400);
+  --ui-pos:       var(--vg400);--ui-pos-soft: var(--vg800);--ui-pos-bar:  var(--vg400);
+  --ui-blue:      var(--vb400);--ui-blue-soft:var(--vb800);--ui-blue-text:var(--vb200);--ui-blue-bar: var(--vb400);
+  --ui-amber:     var(--va400);--ui-amb-soft: var(--va800);--ui-amb-text: var(--va200);--ui-amb-bar:  var(--va400);
+}
+
+/* ─── BASE ────────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:13px;line-height:1.4;background:var(--bg);color:var(--tx);min-height:100vh;transition:background .25s,color .25s;}
+svg{display:block;}
+
+/* ─── LAYOUT ─────────────────────────────────────────────────────────── */
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px 80px;}
+
+/* ─── HEADER ─────────────────────────────────────────────────────────── */
+.hd{padding:32px 0 0;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.hd-title{font-size:21px;font-weight:700;letter-spacing:-.025em;color:var(--tx);}
+.hd-sub{font-size:13px;color:var(--tx-s);margin-top:3px;}
+.hd-actions{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.proto-link,.theme-toggle{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:7px;border:1.5px solid var(--brd-s);font-size:12.5px;color:var(--tx-s);text-decoration:none;white-space:nowrap;cursor:pointer;background:transparent;font-family:inherit;transition:border-color .15s,color .15s,background .15s;}
+.proto-link:hover,.theme-toggle:hover{border-color:var(--ui-accent);color:var(--ui-accent);}
+
+/* ─── SECTION ────────────────────────────────────────────────────────── */
+.section{margin-top:44px;}
+.sec-hd{margin-bottom:18px;}
+.sec-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tx-t);}
+.sec-title{font-size:17px;font-weight:650;letter-spacing:-.02em;color:var(--tx);margin-top:2px;}
+.sec-desc{font-size:13px;color:var(--tx-s);margin-top:3px;}
+.divider{height:1px;background:var(--brd);margin-top:44px;transition:background .25s;}
+
+/* ─── PALETTE RAMPS ──────────────────────────────────────────────────── */
+.ramp-grid{display:flex;flex-direction:column;gap:20px;}
+.ramp-info{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;}
+.ramp-name{font-size:13px;font-weight:600;color:var(--tx);}
+.ramp-tag{font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:20px;border:1px solid var(--brd);color:var(--tx-t);margin-left:2px;}
+.ramp-desc{font-size:12px;color:var(--tx-t);}
+.ramp-row{display:flex;border-radius:10px;overflow:hidden;height:76px;}
+.sw{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:7px 8px;cursor:default;transition:flex .2s;}
+.sw:hover{flex:1.6;}
+.sw-step{font-size:10px;font-weight:700;letter-spacing:.02em;}
+.sw-hex{font-size:9.5px;font-family:'SF Mono','Fira Code',monospace;margin-top:1px;opacity:.75;}
+.sw-badge{font-size:8.5px;font-weight:700;padding:1px 5px;border-radius:3px;margin-top:3px;display:inline-block;}
+.wcag-aaa{background:rgba(26,90,48,.18);color:#1A5A30;}
+.wcag-aa{background:rgba(26,58,106,.18);color:#1A3A6A;}
+.wcag-aal{background:rgba(122,74,16,.18);color:#7A4A10;}
+.wcag-fail{background:rgba(0,0,0,.08);color:#94918F;}
+.dataviz-row{display:flex;border-radius:10px;overflow:hidden;height:56px;}
+.dvsw{flex:1;transition:flex .2s;}
+.dvsw:hover{flex:1.6;}
+
+/* ─── VARIANT GRID ───────────────────────────────────────────────────── */
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.vcard{border:2px solid var(--brd);border-radius:12px;padding:16px;cursor:pointer;background:var(--bg-card);transition:border-color .15s,box-shadow .15s,background .25s;}
+.vcard:hover{border-color:var(--brd-s);}
+.vcard.sel       {border-color:var(--ui-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--ui-accent) 14%,transparent);}
+.vcard.sel-green {border-color:var(--ui-pos);   box-shadow:0 0 0 3px color-mix(in srgb,var(--ui-pos)    14%,transparent);}
+.vcard.sel-grey  {border-color:var(--vn700);    box-shadow:0 0 0 3px color-mix(in srgb,var(--vn700)     14%,transparent);}
+.vcard.sel-blue  {border-color:var(--ui-blue);  box-shadow:0 0 0 3px color-mix(in srgb,var(--ui-blue)   14%,transparent);}
+.vcard.sel-amber {border-color:var(--ui-amber); box-shadow:0 0 0 3px color-mix(in srgb,var(--ui-amber)  14%,transparent);}
+.vcard-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;}
+.vcard-name{font-size:13px;font-weight:650;color:var(--tx);}
+.vcard-hue{font-size:11px;color:var(--tx-t);font-family:'SF Mono','Fira Code',monospace;margin-top:2px;}
+.check{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border .2s;}
+.check.on-purple{background:var(--ui-accent);}
+.check.on-green {background:var(--ui-pos);}
+.check.on-grey  {background:var(--vn700);}
+.check.on-blue  {background:var(--ui-blue);}
+.check.on-amber {background:var(--ui-amber);}
+.check.off{border:1.5px solid var(--brd-s);}
+.vcard-swatches{display:flex;border-radius:6px;overflow:hidden;height:40px;margin-bottom:12px;}
+.vsw{flex:1;}
+.vcard-stats{display:flex;border:1px solid var(--brd);border-radius:8px;overflow:hidden;transition:border-color .25s;}
+.vstat{flex:1;padding:8px 10px;border-right:1px solid var(--brd);text-align:center;transition:border-color .25s;}
+.vstat:last-child{border-right:none;}
+.vs-step{font-size:10px;color:var(--tx-t);margin-bottom:3px;}
+.vs-ratio{font-size:14px;font-weight:700;color:var(--tx);letter-spacing:-.02em;}
+.vs-badge{font-size:9px;font-weight:700;padding:2px 5px;border-radius:3px;margin-top:3px;display:inline-block;}
+
+/* ─── PREVIEW ────────────────────────────────────────────────────────── */
+.preview-label-row{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:16px;}
+.preview-variant-tag{font-size:11.5px;color:var(--tx-s);background:var(--bg-raise);padding:6px 14px;border-radius:20px;border:1px solid var(--brd);flex-shrink:0;text-align:right;line-height:1.7;transition:background .25s,border-color .25s,color .25s;}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.pcard{background:var(--bg-card);border:1px solid var(--brd);border-radius:10px;padding:16px;transition:background .25s,border-color .25s;}
+.pcard-title{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tx-t);margin-bottom:14px;}
+.pcard-full{grid-column:1/-1;}
+
+/* Preview components */
+.btn-pri{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border-radius:7px;background:var(--ui-accent);color:#fff;font-size:12.5px;font-weight:550;border:none;cursor:pointer;transition:background .25s;}
+.btn-danger{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border-radius:7px;background:var(--ui-danger);color:#fff;font-size:12.5px;font-weight:550;border:none;cursor:pointer;transition:background .25s;}
+.btn-sec{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border-radius:7px;border:1.5px solid var(--brd-s);background:var(--bg-card);color:var(--tx);font-size:12.5px;font-weight:450;cursor:pointer;transition:background .25s,border-color .25s,color .25s;}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:550;transition:background .25s,color .25s;}
+.badge-danger  {background:var(--ui-dan-soft);color:var(--ui-danger);}
+.badge-positive{background:var(--ui-pos-soft);color:var(--ui-pos);}
+.badge-accent  {background:var(--ui-acc-soft);color:var(--ui-accent);}
+.badge-warning {background:var(--ui-amb-soft);color:var(--ui-amber);}
+.badge-info    {background:var(--ui-blue-soft);color:var(--ui-blue);}
+.nav-active{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:6px;background:var(--ui-acc-soft);color:var(--ui-accent);font-size:12.5px;font-weight:550;transition:background .25s,color .25s;}
+.nav-inactive{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:6px;color:var(--tx-s);font-size:12.5px;border-top:1px solid var(--brd);transition:border-color .25s,color .25s;}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:9px;}
+.bar-lbl{font-size:11px;color:var(--tx-s);width:54px;flex-shrink:0;}
+.bar-track{flex:1;height:8px;background:var(--bg-raise);border-radius:4px;overflow:hidden;transition:background .25s;}
+.bar-fill{height:100%;border-radius:4px;transition:background .3s;}
+.bar-pct{font-size:11.5px;font-weight:600;width:32px;text-align:right;}
+.input-pv{width:100%;padding:8px 12px;border-radius:7px;border:2px solid var(--ui-accent);font-size:13px;outline:none;background:var(--bg-card);color:var(--tx);font-family:inherit;transition:background .25s,color .25s,border-color .25s;}
+.toggle{display:inline-flex;border:1.5px solid var(--ui-accent);border-radius:7px;overflow:hidden;transition:border-color .25s;}
+.tog-on{padding:6px 14px;background:var(--ui-accent);color:#fff;font-size:12px;font-weight:550;cursor:pointer;transition:background .25s;}
+.tog-off{padding:6px 14px;color:var(--ui-accent);font-size:12px;cursor:pointer;transition:color .25s;}
+.link-pv{color:var(--ui-accent);font-size:12.5px;text-decoration:underline;cursor:pointer;transition:color .25s;}
+.k-lbl{padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;display:inline-block;transition:background .25s,color .25s;}
+.k-todo   {background:var(--bg-raise);color:var(--tx-s);}
+.k-inprog {background:var(--ui-acc-soft);color:var(--ui-acc-text);}
+.k-overdue{background:var(--ui-dan-soft);color:var(--ui-dan-text);}
+.k-upcoming{background:var(--ui-pos-soft);color:var(--vg600);}
+.notif-dot{width:8px;height:8px;border-radius:50%;background:var(--ui-danger);display:inline-block;flex-shrink:0;transition:background .25s;}
+
+/* ─── NOTE BANNER ────────────────────────────────────────────────────── */
+.note{font-size:12px;color:var(--tx-t);background:var(--bg-raise);border:1px solid var(--brd);border-radius:8px;padding:10px 14px;margin-bottom:18px;display:flex;align-items:center;gap:8px;transition:background .25s,border-color .25s,color .25s;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HEADER -->
+<header class="hd">
+  <div>
+    <div class="hd-title">Mitti Colourway — Palette Explorer</div>
+    <div class="hd-sub">Preferred palette · Six colour ramps — all explorable</div>
+  </div>
+  <div class="hd-actions">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark">
+      <!-- Sun (shown in light mode) -->
+      <svg id="icon-sun" width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="7" cy="7" r="2.5"/><path d="M7 1v1.5M7 11.5V13M1 7h1.5M11.5 7H13M2.9 2.9l1.1 1.1M10 10l1.1 1.1M10 4l1.1-1.1M2.9 11.1 4 10"/>
+      </svg>
+      <!-- Moon (shown in dark mode) -->
+      <svg id="icon-moon" width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" style="display:none">
+        <path d="M11.5 9A5.5 5.5 0 015 2.5a5.5 5.5 0 100 9A5.5 5.5 0 0111.5 9z"/>
+      </svg>
+      <span id="theme-label">Dark mode</span>
+    </button>
+    <a class="proto-link" href="mitti-prototype.html">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="10" height="10" rx="2"/><path d="M5 7h4M7 5v4"/></svg>
+      Open prototype
+    </a>
+  </div>
+</header>
+
+<!-- ══════ PREFERRED PALETTE ══════════════════════════════════════════ -->
+<section class="section">
+  <div class="sec-hd">
+    <div class="sec-label">Reference</div>
+    <div class="sec-title">Preferred palette</div>
+    <div class="sec-desc">Four base ramps at their preferred values. The exploration sections below show alternatives — every selection updates the live preview.</div>
+  </div>
+  <div class="ramp-grid" id="confirmed-ramps"></div>
+</section>
+
+<!-- ══════ DATA VIZ PALETTE ══════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="section">
+  <div class="sec-hd">
+    <div class="sec-label">Exploration</div>
+    <div class="sec-title">Data visualisation palette</div>
+    <div class="sec-desc">Blue (series 1) and amber (series 2) swatches update as you select variants below.</div>
+  </div>
+  <div class="ramp-grid">
+    <div>
+      <div class="ramp-info">
+        <span class="ramp-name" id="dv-blue-name">Azure blue</span>
+        <span class="ramp-tag">Series 1</span>
+        <span class="ramp-desc" id="dv-blue-desc">H ~215°</span>
+      </div>
+      <div class="dataviz-row" id="dv-blue-row"></div>
+    </div>
+    <div style="margin-top:16px">
+      <div class="ramp-info">
+        <span class="ramp-name" id="dv-amber-name">Golden amber</span>
+        <span class="ramp-tag">Series 2</span>
+        <span class="ramp-desc" id="dv-amber-desc">H ~40°</span>
+      </div>
+      <div class="dataviz-row" id="dv-amber-row"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ EMBER ══════════════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="section">
+  <div class="sec-hd">
+    <div class="sec-label">Explore · Negative / Danger</div>
+    <div class="sec-title">Ember red — alternatives</div>
+    <div class="sec-desc">Three hue angles with shared earthy warmth. Select one to apply it across buttons, badges, bars, and score rings.</div>
+  </div>
+  <div class="vgrid" id="ember-grid"></div>
+</section>
+
+<!-- ══════ PURPLE ═════════════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="section">
+  <div class="sec-hd">
+    <div class="sec-label">Explore · Interactive / Accent</div>
+    <div class="sec-title">Purple accent — alternatives</div>
+    <div class="sec-desc">All three hit AA at step 500. The hue shift changes the character of every button, link, toggle, and active nav state.</div>
+  </div>
+  <div class="vgrid" id="purple-grid"></div>
+</section>
+
+<!-- ══════ GREEN ══════════════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="section">
+  <div class="sec-hd">
+    <div class="sec-label">Explore · Positive / Pass</div>
+    <div class="sec-title">Green — alternatives</div>
+    <div class="sec-desc">Three green hue angles — each shifts the warmth or coolness of every health score, "Passed" badge, score bar, and the green series in the data viz chart.</div>
+  </div>
+  <div class="vgrid" id="green-grid"></div>
+</section>
+
+<!-- ══════ GREY ═══════════════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="section">
+  <div class="sec-hd">
+    <div class="sec-label">Explore · Surface / Neutral</div>
+    <div class="sec-title">Grey — alternatives</div>
+    <div class="sec-desc">Selecting a grey variant cascades through background, borders, and text — shift the whole-UI character in real time.</div>
+  </div>
+  <div class="note">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5.5"/><path d="M7 5v2.5M7 9v.5"/></svg>
+    Switching a grey variant updates this entire page — background, borders, and text all shift together.
+  </div>
+  <div class="vgrid" id="grey-grid"></div>
+</section>
+
+<!-- ══════ BLUE ═══════════════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="section">
+  <div class="sec-hd">
+    <div class="sec-label">Explore · Data viz series 1</div>
+    <div class="sec-title">Blue — alternatives</div>
+    <div class="sec-desc">Azure matches the left-frame scale in the Figma "New scale testing" file. Cornflower maps to the right frame. Pacific sky anchors from #5ECEFA at step 300 for a bright, open feel.</div>
+  </div>
+  <div class="vgrid" id="blue-grid"></div>
+</section>
+
+<!-- ══════ AMBER ══════════════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="section">
+  <div class="sec-hd">
+    <div class="sec-label">Explore · Data viz series 2 / Warning</div>
+    <div class="sec-title">Amber — alternatives</div>
+    <div class="sec-desc">All three hit AA at step 500 and serve as the warning semantic colour. Golden is classic warm amber; Saffron shifts toward yellow-amber; Marigold is the brightest — pure yellow-gold with no orange undertone.</div>
+  </div>
+  <div class="vgrid" id="amber-grid"></div>
+</section>
+
+<!-- ══════ LIVE PREVIEW ═══════════════════════════════════════════════ -->
+<div class="divider"></div>
+<section class="section">
+  <div class="preview-label-row">
+    <div>
+      <div class="sec-label">Live preview</div>
+      <div class="sec-title">All selected variants applied to UI</div>
+    </div>
+    <div class="preview-variant-tag" id="preview-tag">
+      Ember: Preferred · Purple: Preferred · Green: Preferred Moss<br>
+      Grey: Preferred Warm · Blue: Azure · Amber: Golden
+    </div>
+  </div>
+  <div class="pgrid">
+
+    <div class="pcard">
+      <div class="pcard-title">Buttons &amp; actions</div>
+      <div style="display:flex;flex-direction:column;gap:9px;align-items:flex-start">
+        <button class="btn-pri"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 1v10M1 6h10"/></svg>Create action</button>
+        <button class="btn-danger"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="5"/><path d="M6 3.5v3M6 8v.5"/></svg>Mark failed</button>
+        <button class="btn-sec">Cancel</button>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <div class="pcard-title">Status badges</div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+        <span class="badge badge-danger"><span class="notif-dot"></span>Non-compliant</span>
+        <span class="badge badge-warning"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 1.5L11 10.5H1L6 1.5z"/><path d="M6 5v2.5M6 8.5v.5"/></svg>Review needed</span>
+        <span class="badge badge-info"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="5"/><path d="M6 5.5v3M6 3.5v.5"/></svg>In review</span>
+        <span class="badge badge-positive"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6l3 3 5-5"/></svg>Compliant</span>
+        <span class="badge badge-accent"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="5"/><path d="M6 4v2.5l1.5 1.5"/></svg>In progress</span>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <div class="pcard-title">Navigation &amp; kanban</div>
+      <div style="border:1px solid var(--brd);border-radius:8px;overflow:hidden;margin-bottom:12px;transition:border-color .25s;">
+        <div class="nav-active"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="8" width="3" height="5" rx=".75"/><rect x="5.5" y="4" width="3" height="9" rx=".75"/><rect x="9" y="1" width="3" height="12" rx=".75"/></svg>Insights</div>
+        <div class="nav-inactive"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 2a4 4 0 014 4v3l1.5 1.5H2.5L4 9V6a4 4 0 014-4zM5.5 12a1.5 1.5 0 003 0"/></svg>Actions</div>
+        <div class="nav-inactive"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5.5"/><path d="M7 4.5v3M7 9v.5"/></svg>Issues</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:center;gap:8px"><span class="k-lbl k-todo">To Do</span><span style="font-size:11px;color:var(--tx-t)">neutral</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span class="k-lbl k-inprog">In progress</span><span style="font-size:11px;color:var(--tx-t)">accent</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span class="k-lbl k-overdue">Overdue</span><span style="font-size:11px;color:var(--tx-t)">danger</span></div>
+        <div style="display:flex;align-items:center;gap:8px"><span class="k-lbl k-upcoming">Upcoming</span><span style="font-size:11px;color:var(--tx-t)">positive</span></div>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <div class="pcard-title">Location health scores</div>
+      <div class="bar-row"><div class="bar-lbl">Front of house</div><div class="bar-track"><div class="bar-fill" style="width:64%;background:var(--ui-dan-bar)"></div></div><div class="bar-pct" style="color:var(--ui-danger)">64%</div></div>
+      <div class="bar-row"><div class="bar-lbl">Kitchen</div><div class="bar-track"><div class="bar-fill" style="width:78%;background:var(--ui-pos-bar)"></div></div><div class="bar-pct" style="color:var(--ui-pos)">78%</div></div>
+      <div class="bar-row"><div class="bar-lbl">POS</div><div class="bar-track"><div class="bar-fill" style="width:53%;background:var(--ui-dan-bar)"></div></div><div class="bar-pct" style="color:var(--ui-danger)">53%</div></div>
+      <div class="bar-row"><div class="bar-lbl">Training</div><div class="bar-track"><div class="bar-fill" style="width:91%;background:var(--ui-pos-bar)"></div></div><div class="bar-pct" style="color:var(--ui-pos)">91%</div></div>
+      <div class="bar-row" style="margin-bottom:0"><div class="bar-lbl">Storage</div><div class="bar-track"><div class="bar-fill" style="width:72%;background:var(--ui-pos-bar)"></div></div><div class="bar-pct" style="color:var(--ui-pos)">72%</div></div>
+    </div>
+
+    <div class="pcard">
+      <div class="pcard-title">Form elements</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <input class="input-pv" value="CB Downtown Chicago">
+        <div><div class="toggle"><div class="tog-on">Today</div><div class="tog-off">7 days</div><div class="tog-off">30 days</div></div></div>
+        <div class="link-pv">View all inspections →</div>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <div class="pcard-title">Score summary</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:48px;height:48px;border-radius:50%;background:var(--ui-pos-soft);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--ui-pos);flex-shrink:0;transition:background .25s,color .25s">91%</div>
+          <div><div style="font-size:12.5px;font-weight:600;color:var(--tx)">Training room</div><div style="font-size:11.5px;color:var(--tx-t)">Last inspected today</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:48px;height:48px;border-radius:50%;background:var(--ui-amb-soft);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--ui-amber);flex-shrink:0;transition:background .25s,color .25s">64%</div>
+          <div><div style="font-size:12.5px;font-weight:600;color:var(--tx)">Front of house</div><div style="font-size:11.5px;color:var(--tx-t)">3 actions open</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:48px;height:48px;border-radius:50%;background:var(--ui-dan-soft);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--ui-danger);flex-shrink:0;transition:background .25s,color .25s">53%</div>
+          <div><div style="font-size:12.5px;font-weight:600;color:var(--tx)">POS station</div><div style="font-size:11.5px;color:var(--tx-t)">Overdue review</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DATA VIZ CHART — full width, 3 series × 6 sites ── -->
+    <div class="pcard pcard-full">
+      <div class="pcard-title">Data visualisation — inspections by site (blue · amber · green)</div>
+      <svg viewBox="0 0 700 155" style="width:100%;height:auto;overflow:visible" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Legend -->
+        <rect x="36" y="5" width="9" height="9" rx="2" fill="var(--ui-blue-bar)"/>
+        <text x="48" y="13" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="var(--tx-s)">Inspections completed</text>
+        <rect x="178" y="5" width="9" height="9" rx="2" fill="var(--ui-amb-bar)"/>
+        <text x="190" y="13" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="var(--tx-s)">Actions raised</text>
+        <rect x="284" y="5" width="9" height="9" rx="2" fill="var(--ui-pos-bar)"/>
+        <text x="296" y="13" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="9" fill="var(--tx-s)">Issues resolved</text>
+
+        <!-- Gridlines (baseline + 3 levels) -->
+        <line x1="30" y1="118" x2="688" y2="118" stroke="var(--brd-s)" stroke-width="1"/>
+        <line x1="30" y1="91"  x2="688" y2="91"  stroke="var(--brd)" stroke-width="0.75" stroke-dasharray="3 3"/>
+        <line x1="30" y1="64"  x2="688" y2="64"  stroke="var(--brd)" stroke-width="0.75" stroke-dasharray="3 3"/>
+        <line x1="30" y1="37"  x2="688" y2="37"  stroke="var(--brd)" stroke-width="0.75" stroke-dasharray="3 3"/>
+
+        <!-- Y axis labels -->
+        <text x="26" y="121" text-anchor="end" font-family="-apple-system,sans-serif" font-size="8" fill="var(--tx-t)">0</text>
+        <text x="26" y="94"  text-anchor="end" font-family="-apple-system,sans-serif" font-size="8" fill="var(--tx-t)">25</text>
+        <text x="26" y="67"  text-anchor="end" font-family="-apple-system,sans-serif" font-size="8" fill="var(--tx-t)">50</text>
+        <text x="26" y="40"  text-anchor="end" font-family="-apple-system,sans-serif" font-size="8" fill="var(--tx-t)">75</text>
+
+        <!-- ── G1: Westfield (bars at x=48, 74, 100 · h=62,38,48) ── -->
+        <rect x="48"  y="56" width="22" height="62" rx="3" fill="var(--ui-blue-bar)"/>
+        <rect x="74"  y="80" width="22" height="38" rx="3" fill="var(--ui-amb-bar)"/>
+        <rect x="100" y="70" width="22" height="48" rx="3" fill="var(--ui-pos-bar)"/>
+        <text x="85"  y="132" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8.5" fill="var(--tx-t)">Westfield</text>
+
+        <!-- ── G2: City CBD (bars at x=158, 184, 210 · h=76,52,60) ── -->
+        <rect x="158" y="42" width="22" height="76" rx="3" fill="var(--ui-blue-bar)"/>
+        <rect x="184" y="66" width="22" height="52" rx="3" fill="var(--ui-amb-bar)"/>
+        <rect x="210" y="58" width="22" height="60" rx="3" fill="var(--ui-pos-bar)"/>
+        <text x="195" y="132" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8.5" fill="var(--tx-t)">City CBD</text>
+
+        <!-- ── G3: Circular Quay (bars at x=268, 294, 320 · h=50,65,42) ── -->
+        <rect x="268" y="68" width="22" height="50" rx="3" fill="var(--ui-blue-bar)"/>
+        <rect x="294" y="53" width="22" height="65" rx="3" fill="var(--ui-amb-bar)"/>
+        <rect x="320" y="76" width="22" height="42" rx="3" fill="var(--ui-pos-bar)"/>
+        <text x="305" y="132" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8.5" fill="var(--tx-t)">Circular Quay</text>
+
+        <!-- ── G4: Parramatta (bars at x=378, 404, 430 · h=70,28,55) ── -->
+        <rect x="378" y="48" width="22" height="70" rx="3" fill="var(--ui-blue-bar)"/>
+        <rect x="404" y="90" width="22" height="28" rx="3" fill="var(--ui-amb-bar)"/>
+        <rect x="430" y="63" width="22" height="55" rx="3" fill="var(--ui-pos-bar)"/>
+        <text x="415" y="132" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8.5" fill="var(--tx-t)">Parramatta</text>
+
+        <!-- ── G5: North Sydney (bars at x=488, 514, 540 · h=58,44,72) ── -->
+        <rect x="488" y="60" width="22" height="58" rx="3" fill="var(--ui-blue-bar)"/>
+        <rect x="514" y="74" width="22" height="44" rx="3" fill="var(--ui-amb-bar)"/>
+        <rect x="540" y="46" width="22" height="72" rx="3" fill="var(--ui-pos-bar)"/>
+        <text x="525" y="132" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8.5" fill="var(--tx-t)">North Sydney</text>
+
+        <!-- ── G6: Bondi (bars at x=598, 624, 650 · h=40,74,36) ── -->
+        <rect x="598" y="78" width="22" height="40" rx="3" fill="var(--ui-blue-bar)"/>
+        <rect x="624" y="44" width="22" height="74" rx="3" fill="var(--ui-amb-bar)"/>
+        <rect x="650" y="82" width="22" height="36" rx="3" fill="var(--ui-pos-bar)"/>
+        <text x="635" y="132" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8.5" fill="var(--tx-t)">Bondi</text>
+
+        <!-- Chart sub-label -->
+        <text x="360" y="148" text-anchor="middle" font-family="-apple-system,sans-serif" font-size="8" fill="var(--tx-t)">MegaBites AU — last 30 days</text>
+      </svg>
+    </div>
+
+  </div><!-- /pgrid -->
+</section>
+
+</div><!-- /wrap -->
+<script>
+/* ─── PALETTE DATA ───────────────────────────────────────────────────── */
+const confirmedPalette=[
+  {name:'Neutral surface',desc:'Warm grey — H 0–8° (preferred)',steps:{'50':'#FCFBFB','100':'#F6F4F4','200':'#EAEAEA','300':'#D6D4D3','400':'#BCBAB8','500':'#94918F','600':'#666260','700':'#454140','800':'#2C2724','900':'#1C1714'}},
+  {name:'Moss green',desc:'Positive · pass — H ~138° (preferred)',steps:{'50':'#F2FAF4','100':'#D0E9D8','200':'#A5D4B4','300':'#6EB888','400':'#3A9E5A','500':'#257C42','600':'#1A5A30','700':'#144524','800':'#0E3019','900':'#091D0F'}},
+  {name:'Ember red',desc:'Negative · fail — H ~8° (preferred)',steps:{'50':'#FDF3F0','100':'#F9D8D0','200':'#F2B0A0','300':'#E87860','400':'#D03820','500':'#B02010','600':'#8E1608','700':'#701106','800':'#520D04','900':'#360802'}},
+  {name:'Purple accent',desc:'Interactive · accent — H ~243° (preferred)',steps:{'50':'#F4F4FC','100':'#E6E4F8','200':'#C8C4F2','300':'#A49EE8','400':'#6E68DA','500':'#4A42C8','600':'#3830A0','700':'#2A2478','800':'#1C1852','900':'#100E30'}}
+];
+
+const emberVariants=[
+  {key:'confirmed',name:'Preferred Ember',hue:'H ~8°',desc:'Warm brick red — preferred',steps:{'50':'#FDF3F0','100':'#F9D8D0','200':'#F2B0A0','300':'#E87860','400':'#D03820','500':'#B02010','600':'#8E1608','700':'#701106','800':'#520D04','900':'#360802'}},
+  {key:'truered',name:'True Red',hue:'H 0°',desc:'Pure neutral red — cooler, no warmth',steps:{'50':'#FFF5F5','100':'#F9D0D0','200':'#F2A0A0','300':'#E86060','400':'#D01818','500':'#A81010','600':'#880C0C','700':'#6A0808','800':'#500606','900':'#380404'}},
+  {key:'terracotta',name:'Terracotta',hue:'H ~16°',desc:'Orange-red — more heat and warmth',steps:{'50':'#FFF4EE','100':'#F9D8C0','200':'#F2B090','300':'#E88050','400':'#D04818','500':'#B03510','600':'#8E2808','700':'#701E06','800':'#521504','900':'#381002'}}
+];
+
+const purpleVariants=[
+  {key:'confirmed',name:'Preferred Purple',hue:'H ~243°',desc:'Warm lavender — preferred',steps:{'50':'#F4F4FC','100':'#E6E4F8','200':'#C8C4F2','300':'#A49EE8','400':'#6E68DA','500':'#4A42C8','600':'#3830A0','700':'#2A2478','800':'#1C1852','900':'#100E30'}},
+  {key:'violet',name:'Warm Violet',hue:'H ~258°',desc:'Warmer, more magenta-facing',steps:{'50':'#F6F4FC','100':'#EAE2F8','200':'#D0BCF4','300':'#B094EC','400':'#8058DC','500':'#5C38CC','600':'#4428A2','700':'#301C7A','800':'#201252','900':'#120C32'}},
+  {key:'indigo',name:'Cool Indigo',hue:'H ~228°',desc:'Cooler, more blue-facing',steps:{'50':'#F2F5FC','100':'#DDE8F8','200':'#BAD0F2','300':'#8BAEE6','400':'#5080DA','500':'#3058C8','600':'#2040A0','700':'#163078','800':'#0E2052','900':'#081432'}}
+];
+
+const greenVariants=[
+  {key:'moss',name:'Preferred Moss',hue:'H ~138°',desc:'Earthy forest green — preferred',steps:{'50':'#F2FAF4','100':'#D0E9D8','200':'#A5D4B4','300':'#6EB888','400':'#3A9E5A','500':'#257C42','600':'#1A5A30','700':'#144524','800':'#0E3019','900':'#091D0F'}},
+  {key:'forest',name:'Forest',hue:'H ~155°',desc:'Cooler, more emerald — deeper jewel green',steps:{'50':'#F0FAF6','100':'#C8EDD8','200':'#90D8B4','300':'#48BE8C','400':'#189C6E','500':'#0C7A56','600':'#085E42','700':'#063E2C','800':'#042A1E','900':'#021A12'}},
+  {key:'sage',name:'Sage',hue:'H ~125°',desc:'Warmer, yellow-green — fresher, more natural',steps:{'50':'#F4FAF0','100':'#D8EDCA','200':'#ACDB94','300':'#76C258','400':'#48A42E','500':'#308218','600':'#1E6010','700':'#164808','800':'#0E3006','900':'#081E04'}}
+];
+
+const greyVariants=[
+  {key:'warm',name:'Preferred Warm',hue:'H ~0–8°',desc:'Very subtle warmth — preferred',steps:{'50':'#FCFBFB','100':'#F6F4F4','200':'#EAEAEA','300':'#D6D4D3','400':'#BCBAB8','500':'#94918F','600':'#666260','700':'#454140','800':'#2C2724','900':'#1C1714'}},
+  {key:'slate',name:'Cool slate',hue:'H ~215°',desc:'Blue-grey tendency — cooler, more digital',steps:{'50':'#F8F9FB','100':'#ECEEF4','200':'#D0D6E6','300':'#B0B8D0','400':'#8690B0','500':'#606A86','600':'#484E68','700':'#32384C','800':'#202430','900':'#12161E'}},
+  {key:'stone',name:'Stone',hue:'H ~22°',desc:'Beige-grey tendency — warmer, more natural',steps:{'50':'#FCFAF8','100':'#F3EDEA','200':'#E2D4CE','300':'#C6B4AC','400':'#A29088','500':'#806C60','600':'#5E5048','700':'#443C38','800':'#2E2824','900':'#1A1816'}}
+];
+
+const blueVariants=[
+  {key:'azure',name:'Azure',hue:'H ~215°',desc:'Cornflower — matches Figma left frame',steps:{'50':'#F0F5FB','100':'#CCE0F2','200':'#98C4E8','300':'#5898D8','400':'#2272C0','500':'#1568A4','600':'#104C7E','700':'#0A3860','800':'#062448','900':'#031430'}},
+  {key:'cornflower',name:'Cornflower',hue:'H ~222°',desc:'Cooler, more blue-violet — Figma right frame',steps:{'50':'#F2F4FC','100':'#D4E0F8','200':'#A8C0F2','300':'#6890E6','400':'#3A6CD8','500':'#3060C8','600':'#1E4498','700':'#123070','800':'#0A2050','900':'#04122E'}},
+  {key:'pacific',name:'Pacific sky',hue:'H ~197°',desc:'#5ECEFA at step 300 — bright, open, sky cyan',steps:{'50':'#F0FBFE','100':'#C8EEFA','200':'#90D8F0','300':'#5ECEFA','400':'#1AAED2','500':'#0878A0','600':'#065E7E','700':'#04465E','800':'#033040','900':'#021C26'}}
+];
+
+const amberVariants=[
+  {key:'golden',name:'Golden amber',hue:'H ~40°',desc:'Classic warm amber — earthy gold',steps:{'50':'#FDF8F0','100':'#F8E4C0','200':'#F0C880','300':'#E0A030','400':'#C47818','500':'#A86010','600':'#844C08','700':'#643804','800':'#4A2804','900':'#301A02'}},
+  {key:'saffron',name:'Saffron',hue:'H ~45°',desc:'More yellow-amber — warmer mid-tones',steps:{'50':'#FDFBEE','100':'#FAECBC','200':'#F4D068','300':'#E8A820','400':'#CC8408','500':'#9C6A08','600':'#7A5408','700':'#5E4006','800':'#442C04','900':'#2C1C02'}},
+  {key:'warmgold',name:'Warm Gold',hue:'H ~40°',desc:'Restrained chroma — golden, not orange, not muddy',steps:{'50':'#FAF9F7','100':'#F1EBDF','200':'#EAD6AE','300':'#E2BA69','400':'#D99D26','500':'#946C1C','600':'#6B4E14','700':'#4A3610','800':'#31250C','900':'#1C1508'}}
+];
+
+/* ─── WCAG ───────────────────────────────────────────────────────────── */
+function hexRgb(h){return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];}
+function sRGB(c){c/=255;return c<=0.04045?c/12.92:Math.pow((c+0.055)/1.055,2.4);}
+function lum(hex){const[r,g,b]=hexRgb(hex);return 0.2126*sRGB(r)+0.7152*sRGB(g)+0.0722*sRGB(b);}
+function cr(hex,bg='#FFFFFF'){const l1=lum(hex),l2=lum(bg),hi=Math.max(l1,l2),lo=Math.min(l1,l2);return((hi+0.05)/(lo+0.05)).toFixed(1);}
+function badge(r){const v=parseFloat(r);if(v>=7)return['AAA','wcag-aaa'];if(v>=4.5)return['AA','wcag-aa'];if(v>=3)return['AA large','wcag-aal'];return['Fails','wcag-fail'];}
+function textOnBg(hex){return lum(hex)>0.22?'rgba(28,23,20,0.82)':'rgba(252,251,251,0.82)';}
+
+/* ─── RENDER CONFIRMED PALETTE ───────────────────────────────────────── */
+function renderPalette(){
+  const el=document.getElementById('confirmed-ramps');
+  confirmedPalette.forEach(ramp=>{
+    const swHtml=Object.entries(ramp.steps).map(([step,hex])=>{
+      const ratio=cr(hex);const[blbl,bcls]=badge(ratio);const tc=textOnBg(hex);
+      const key=['400','500','600'].includes(step);
+      return`<div class="sw" style="background:${hex}"><span class="sw-step" style="color:${tc}">${step}</span><span class="sw-hex" style="color:${tc}">${hex}</span>${key?`<span class="sw-badge ${bcls}" style="color:${tc}">${blbl} ${ratio}:1</span>`:''}</div>`;
+    }).join('');
+    const b=document.createElement('div');b.className='ramp-block';
+    b.innerHTML=`<div class="ramp-info"><span class="ramp-name">${ramp.name}</span><span class="ramp-desc">${ramp.desc}</span></div><div class="ramp-row">${swHtml}</div>`;
+    el.appendChild(b);
+  });
+}
+
+/* ─── RENDER DATA VIZ RAMPS ──────────────────────────────────────────── */
+function renderDataVizRamps(){
+  ['blue','amber'].forEach(t=>{
+    const p=t==='blue'?'vb':'va';
+    const el=document.getElementById(`dv-${t}-row`);
+    if(el)el.innerHTML=['50','100','200','300','400','500','600','700','800','900'].map(s=>`<div class="dvsw" style="background:var(--${p}${s})"></div>`).join('');
+  });
+}
+
+/* ─── VARIANT STATE ──────────────────────────────────────────────────── */
+let selEmber='confirmed',selPurple='confirmed',selGreen='moss',selGrey='warm',selBlue='azure',selAmber='golden';
+
+const typeConfig={
+  ember: {variants:()=>emberVariants, sel:()=>selEmber, checkClass:'on-purple',selClass:'sel'},
+  purple:{variants:()=>purpleVariants,sel:()=>selPurple,checkClass:'on-purple',selClass:'sel'},
+  green: {variants:()=>greenVariants, sel:()=>selGreen, checkClass:'on-green', selClass:'sel-green'},
+  grey:  {variants:()=>greyVariants,  sel:()=>selGrey,  checkClass:'on-grey',  selClass:'sel-grey'},
+  blue:  {variants:()=>blueVariants,  sel:()=>selBlue,  checkClass:'on-blue',  selClass:'sel-blue'},
+  amber: {variants:()=>amberVariants, sel:()=>selAmber, checkClass:'on-amber', selClass:'sel-amber'}
+};
+const prefixMap={ember:'ve',purple:'vp',green:'vg',grey:'vn',blue:'vb',amber:'va'};
+
+/* ─── RENDER VARIANT CARDS ───────────────────────────────────────────── */
+function renderVariantGroup(id,variants,type){
+  const el=document.getElementById(id);
+  const cfg=typeConfig[type];
+  variants.forEach(v=>{
+    const isSel=v.key===cfg.sel();
+    const swHtml=Object.values(v.steps).map(h=>`<div class="vsw" style="background:${h}"></div>`).join('');
+    const r4=cr(v.steps['400']),r5=cr(v.steps['500']),r6=cr(v.steps['600']);
+    const[l4,c4]=badge(r4),[l5,c5]=badge(r5),[l6,c6]=badge(r6);
+    const card=document.createElement('div');
+    card.className=`vcard${isSel?' '+cfg.selClass:''}`;
+    card.id=`vc-${type}-${v.key}`;
+    card.onclick=()=>selectVariant(type,v.key);
+    card.innerHTML=`
+      <div class="vcard-hd"><div><div class="vcard-name">${v.name}</div><div class="vcard-hue">${v.hue} — ${v.desc}</div></div>
+        <div class="check ${isSel?cfg.checkClass:'off'}" id="chk-${type}-${v.key}">${isSel?`<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="2.2"><path d="M2 5l2.5 2.5 3.5-4"/></svg>`:''}</div>
+      </div>
+      <div class="vcard-swatches">${swHtml}</div>
+      <div class="vcard-stats">
+        <div class="vstat"><div class="vs-step">Step 400</div><div class="vs-ratio">${r4}:1</div><span class="vs-badge ${c4}">${l4}</span></div>
+        <div class="vstat"><div class="vs-step">Step 500</div><div class="vs-ratio">${r5}:1</div><span class="vs-badge ${c5}">${l5}</span></div>
+        <div class="vstat"><div class="vs-step">Step 600</div><div class="vs-ratio">${r6}:1</div><span class="vs-badge ${c6}">${l6}</span></div>
+      </div>`;
+    el.appendChild(card);
+  });
+}
+
+/* ─── SELECT VARIANT ─────────────────────────────────────────────────── */
+function selectVariant(type,key){
+  const cfg=typeConfig[type];
+  const v=cfg.variants().find(x=>x.key===key);
+  if(!v)return;
+  if(type==='ember') selEmber=key;
+  if(type==='purple')selPurple=key;
+  if(type==='green') selGreen=key;
+  if(type==='grey')  selGrey=key;
+  if(type==='blue')  selBlue=key;
+  if(type==='amber') selAmber=key;
+  const p=prefixMap[type];
+  Object.entries(v.steps).forEach(([s,h])=>document.documentElement.style.setProperty(`--${p}${s}`,h));
+  cfg.variants().forEach(x=>{
+    const card=document.getElementById(`vc-${type}-${x.key}`);
+    const chk=document.getElementById(`chk-${type}-${x.key}`);
+    const on=x.key===key;
+    if(card){card.classList.remove('sel','sel-green','sel-grey','sel-blue','sel-amber');if(on)card.classList.add(cfg.selClass);}
+    if(chk){chk.className=`check ${on?cfg.checkClass:'off'}`;chk.innerHTML=on?`<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="2.2"><path d="M2 5l2.5 2.5 3.5-4"/></svg>`:'';}
+  });
+  if(type==='blue'){document.getElementById('dv-blue-name').textContent=v.name;document.getElementById('dv-blue-desc').textContent=v.hue;}
+  if(type==='amber'){document.getElementById('dv-amber-name').textContent=v.name;document.getElementById('dv-amber-desc').textContent=v.hue;}
+  const eL=emberVariants.find(x=>x.key===selEmber).name;
+  const pL=purpleVariants.find(x=>x.key===selPurple).name;
+  const gL=greenVariants.find(x=>x.key===selGreen).name;
+  const nL=greyVariants.find(x=>x.key===selGrey).name;
+  const bL=blueVariants.find(x=>x.key===selBlue).name;
+  const aL=amberVariants.find(x=>x.key===selAmber).name;
+  document.getElementById('preview-tag').innerHTML=`Ember: ${eL} · Purple: ${pL} · Green: ${gL}<br>Grey: ${nL} · Blue: ${bL} · Amber: ${aL}`;
+}
+
+/* ─── DARK MODE TOGGLE ───────────────────────────────────────────────── */
+function toggleTheme(){
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  document.documentElement.setAttribute('data-theme',isDark?'light':'dark');
+  document.getElementById('icon-sun').style.display=isDark?'block':'none';
+  document.getElementById('icon-moon').style.display=isDark?'none':'block';
+  document.getElementById('theme-label').textContent=isDark?'Dark mode':'Light mode';
+}
+
+/* ─── INIT ───────────────────────────────────────────────────────────── */
+renderPalette();
+renderDataVizRamps();
+renderVariantGroup('ember-grid', emberVariants, 'ember');
+renderVariantGroup('purple-grid',purpleVariants,'purple');
+renderVariantGroup('green-grid', greenVariants, 'green');
+renderVariantGroup('grey-grid',  greyVariants,  'grey');
+renderVariantGroup('blue-grid',  blueVariants,  'blue');
+renderVariantGroup('amber-grid', amberVariants, 'amber');
+</script>
+</body>
+</html>
