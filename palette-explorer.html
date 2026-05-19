@@ -13,53 +13,53 @@
   --m500:#257C42;--m600:#1A5A30;--m700:#144524;--m800:#0E3019;--m900:#091D0F;
 
   /* ── Variant slots ── */
-  --ve50:#FDF3F0;--ve100:#F9D8D0;--ve200:#F2B0A0;--ve300:#E87860;--ve400:#D03820;
-  --ve500:#B02010;--ve600:#8E1608;--ve700:#701106;--ve800:#520D04;--ve900:#360802;
-  --vp50:#F4F4FC;--vp100:#E6E4F8;--vp200:#C8C4F2;--vp300:#A49EE8;--vp400:#6E68DA;
-  --vp500:#4A42C8;--vp600:#3830A0;--vp700:#2A2478;--vp800:#1C1852;--vp900:#100E30;
-  --vg50:#F2FAF4;--vg100:#D0E9D8;--vg200:#A5D4B4;--vg300:#6EB888;--vg400:#3A9E5A;
-  --vg500:#257C42;--vg600:#1A5A30;--vg700:#144524;--vg800:#0E3019;--vg900:#091D0F;
-  --vn50:#FCFBFB;--vn100:#F6F4F4;--vn200:#EAEAEA;--vn300:#D6D4D3;--vn400:#BCBAB8;
-  --vn500:#94918F;--vn600:#666260;--vn700:#454140;--vn800:#2C2724;--vn900:#1C1714;
-  --vb50:#F0F5FB;--vb100:#CCE0F2;--vb200:#98C4E8;--vb300:#5898D8;--vb400:#2272C0;
-  --vb500:#1568A4;--vb600:#104C7E;--vb700:#0A3860;--vb800:#062448;--vb900:#031430;
-  --va50:#FDF8F0;--va100:#F8E4C0;--va200:#F0C880;--va300:#E0A030;--va400:#C47818;
-  --va500:#A86010;--va600:#844C08;--va700:#643804;--va800:#4A2804;--va900:#301A02;
+  --ember-50:#FDF3F0;--ember-100:#F9D8D0;--ember-200:#F2B0A0;--ember-300:#E87860;--ember-400:#D03820;
+  --ember-500:#B02010;--ember-600:#8E1608;--ember-700:#701106;--ember-800:#520D04;--ember-900:#360802;
+  --purple-50:#F4F4FC;--purple-100:#E6E4F8;--purple-200:#C8C4F2;--purple-300:#A49EE8;--purple-400:#6E68DA;
+  --purple-500:#4A42C8;--purple-600:#3830A0;--purple-700:#2A2478;--purple-800:#1C1852;--purple-900:#100E30;
+  --moss-50:#F2FAF4;--moss-100:#D0E9D8;--moss-200:#A5D4B4;--moss-300:#6EB888;--moss-400:#3A9E5A;
+  --moss-500:#257C42;--moss-600:#1A5A30;--moss-700:#144524;--moss-800:#0E3019;--moss-900:#091D0F;
+  --neutral-50:#FCFBFB;--neutral-100:#F6F4F4;--neutral-200:#EAEAEA;--neutral-300:#D6D4D3;--neutral-400:#BCBAB8;
+  --neutral-500:#94918F;--neutral-600:#666260;--neutral-700:#454140;--neutral-800:#2C2724;--neutral-900:#1C1714;
+  --blue-50:#F0F5FB;--blue-100:#CCE0F2;--blue-200:#98C4E8;--blue-300:#5898D8;--blue-400:#2272C0;
+  --blue-500:#1568A4;--blue-600:#104C7E;--blue-700:#0A3860;--blue-800:#062448;--blue-900:#031430;
+  --amber-50:#FDF8F0;--amber-100:#F8E4C0;--amber-200:#F0C880;--amber-300:#E0A030;--amber-400:#C47818;
+  --amber-500:#A86010;--amber-600:#844C08;--amber-700:#643804;--amber-800:#4A2804;--amber-900:#301A02;
 
   /* ── Semantic slots (light mode defaults) ── */
-  --ui-accent:    var(--vp500);--ui-acc-soft: var(--vp50); --ui-acc-text: var(--vp700);--ui-acc-bar:  var(--vp400);
-  --ui-danger:    var(--ve500);--ui-dan-soft: var(--ve50); --ui-dan-text: var(--ve600);--ui-dan-bar:  var(--ve400);
-  --ui-pos:       var(--vg500);--ui-pos-soft: var(--vg50); --ui-pos-bar:  var(--vg400);
-  --ui-blue:      var(--vb500);--ui-blue-soft:var(--vb50); --ui-blue-text:var(--vb700);--ui-blue-bar: var(--vb400);
-  --ui-amber:     var(--va500);--ui-amb-soft: var(--va50); --ui-amb-text: var(--va700);--ui-amb-bar:  var(--va400);
+  --ui-accent:    var(--purple-500);--ui-acc-soft: var(--purple-50); --ui-acc-text: var(--purple-700);--ui-acc-bar:  var(--purple-400);
+  --ui-danger:    var(--ember-500);--ui-dan-soft: var(--ember-50); --ui-dan-text: var(--ember-600);--ui-dan-bar:  var(--ember-400);
+  --ui-pos:       var(--moss-500);--ui-pos-soft: var(--moss-50); --ui-pos-bar:  var(--moss-400);
+  --ui-blue:      var(--blue-500);--ui-blue-soft:var(--blue-50); --ui-blue-text:var(--blue-700);--ui-blue-bar: var(--blue-400);
+  --ui-amber:     var(--amber-500);--ui-amb-soft: var(--amber-50); --ui-amb-text: var(--amber-700);--ui-amb-bar:  var(--amber-400);
 
   /* ── Layout tokens — cascade through neutral variant ── */
-  --bg:       var(--vn50);
+  --bg:       var(--neutral-50);
   --bg-card:  #FFFFFF;
-  --bg-raise: var(--vn100);
-  --brd:      var(--vn200);
-  --brd-s:    var(--vn300);
-  --tx:       var(--vn900);
-  --tx-s:     var(--vn600);
-  --tx-t:     var(--vn500);
+  --bg-raise: var(--neutral-100);
+  --brd:      var(--neutral-200);
+  --brd-s:    var(--neutral-300);
+  --tx:       var(--neutral-900);
+  --tx-s:     var(--neutral-600);
+  --tx-t:     var(--neutral-500);
 }
 
 /* ─── DARK MODE ───────────────────────────────────────────────────────── */
 [data-theme="dark"] {
-  --bg:       var(--vn900);
-  --bg-card:  var(--vn800);
-  --bg-raise: color-mix(in srgb, var(--vn800) 60%, var(--vn900));
-  --brd:      var(--vn700);
-  --brd-s:    var(--vn600);
-  --tx:       var(--vn50);
-  --tx-s:     var(--vn300);
-  --tx-t:     var(--vn500);
+  --bg:       var(--neutral-900);
+  --bg-card:  var(--neutral-800);
+  --bg-raise: color-mix(in srgb, var(--neutral-800) 60%, var(--neutral-900));
+  --brd:      var(--neutral-700);
+  --brd-s:    var(--neutral-600);
+  --tx:       var(--neutral-50);
+  --tx-s:     var(--neutral-300);
+  --tx-t:     var(--neutral-500);
   /* Semantic — lighter steps for dark bg */
-  --ui-accent:    var(--vp400);--ui-acc-soft: var(--vp800);--ui-acc-text: var(--vp300);--ui-acc-bar:  var(--vp400);
-  --ui-danger:    var(--ve400);--ui-dan-soft: var(--ve800);--ui-dan-text: var(--ve300);--ui-dan-bar:  var(--ve400);
-  --ui-pos:       var(--vg400);--ui-pos-soft: var(--vg800);--ui-pos-bar:  var(--vg400);
-  --ui-blue:      var(--vb400);--ui-blue-soft:var(--vb800);--ui-blue-text:var(--vb200);--ui-blue-bar: var(--vb400);
-  --ui-amber:     var(--va400);--ui-amb-soft: var(--va800);--ui-amb-text: var(--va200);--ui-amb-bar:  var(--va400);
+  --ui-accent:    var(--purple-400);--ui-acc-soft: var(--purple-800);--ui-acc-text: var(--purple-300);--ui-acc-bar:  var(--purple-400);
+  --ui-danger:    var(--ember-400);--ui-dan-soft: var(--ember-800);--ui-dan-text: var(--ember-300);--ui-dan-bar:  var(--ember-400);
+  --ui-pos:       var(--moss-400);--ui-pos-soft: var(--moss-800);--ui-pos-bar:  var(--moss-400);
+  --ui-blue:      var(--blue-400);--ui-blue-soft:var(--blue-800);--ui-blue-text:var(--blue-200);--ui-blue-bar: var(--blue-400);
+  --ui-amber:     var(--amber-400);--ui-amb-soft: var(--amber-800);--ui-amb-text: var(--amber-200);--ui-amb-bar:  var(--amber-400);
 }
 
 /* ─── BASE ────────────────────────────────────────────────────────────── */
@@ -112,7 +112,7 @@ svg{display:block;}
 .vcard:hover{border-color:var(--brd-s);}
 .vcard.sel       {border-color:var(--ui-accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--ui-accent) 14%,transparent);}
 .vcard.sel-green {border-color:var(--ui-pos);   box-shadow:0 0 0 3px color-mix(in srgb,var(--ui-pos)    14%,transparent);}
-.vcard.sel-grey  {border-color:var(--vn700);    box-shadow:0 0 0 3px color-mix(in srgb,var(--vn700)     14%,transparent);}
+.vcard.sel-grey  {border-color:var(--neutral-700);    box-shadow:0 0 0 3px color-mix(in srgb,var(--neutral-700)     14%,transparent);}
 .vcard.sel-blue  {border-color:var(--ui-blue);  box-shadow:0 0 0 3px color-mix(in srgb,var(--ui-blue)   14%,transparent);}
 .vcard.sel-amber {border-color:var(--ui-amber); box-shadow:0 0 0 3px color-mix(in srgb,var(--ui-amber)  14%,transparent);}
 .vcard-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;}
@@ -121,7 +121,7 @@ svg{display:block;}
 .check{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border .2s;}
 .check.on-purple{background:var(--ui-accent);}
 .check.on-green {background:var(--ui-pos);}
-.check.on-grey  {background:var(--vn700);}
+.check.on-grey  {background:var(--neutral-700);}
 .check.on-blue  {background:var(--ui-blue);}
 .check.on-amber {background:var(--ui-amber);}
 .check.off{border:1.5px solid var(--brd-s);}
@@ -168,7 +168,7 @@ svg{display:block;}
 .k-todo   {background:var(--bg-raise);color:var(--tx-s);}
 .k-inprog {background:var(--ui-acc-soft);color:var(--ui-acc-text);}
 .k-overdue{background:var(--ui-dan-soft);color:var(--ui-dan-text);}
-.k-upcoming{background:var(--ui-pos-soft);color:var(--vg600);}
+.k-upcoming{background:var(--ui-pos-soft);color:var(--moss-600);}
 .notif-dot{width:8px;height:8px;border-radius:50%;background:var(--ui-danger);display:inline-block;flex-shrink:0;transition:background .25s;}
 
 /* ─── NOTE BANNER ────────────────────────────────────────────────────── */
@@ -537,9 +537,8 @@ function renderPalette(){
 /* ─── RENDER DATA VIZ RAMPS ──────────────────────────────────────────── */
 function renderDataVizRamps(){
   ['blue','amber'].forEach(t=>{
-    const p=t==='blue'?'vb':'va';
     const el=document.getElementById(`dv-${t}-row`);
-    if(el)el.innerHTML=['50','100','200','300','400','500','600','700','800','900'].map(s=>`<div class="dvsw" style="background:var(--${p}${s})"></div>`).join('');
+    if(el)el.innerHTML=['50','100','200','300','400','500','600','700','800','900'].map(s=>`<div class="dvsw" style="background:var(--${t}-${s})"></div>`).join('');
   });
 }
 
@@ -554,7 +553,7 @@ const typeConfig={
   blue:  {variants:()=>blueVariants,  sel:()=>selBlue,  checkClass:'on-blue',  selClass:'sel-blue'},
   amber: {variants:()=>amberVariants, sel:()=>selAmber, checkClass:'on-amber', selClass:'sel-amber'}
 };
-const prefixMap={ember:'ve',purple:'vp',green:'vg',grey:'vn',blue:'vb',amber:'va'};
+const prefixMap={ember:'ember',purple:'purple',green:'moss',grey:'neutral',blue:'blue',amber:'amber'};
 
 /* ─── RENDER VARIANT CARDS ───────────────────────────────────────────── */
 function renderVariantGroup(id,variants,type){
@@ -595,7 +594,7 @@ function selectVariant(type,key){
   if(type==='blue')  selBlue=key;
   if(type==='amber') selAmber=key;
   const p=prefixMap[type];
-  Object.entries(v.steps).forEach(([s,h])=>document.documentElement.style.setProperty(`--${p}${s}`,h));
+  Object.entries(v.steps).forEach(([s,h])=>document.documentElement.style.setProperty(`--${p}-${s}`,h));
   cfg.variants().forEach(x=>{
     const card=document.getElementById(`vc-${type}-${x.key}`);
     const chk=document.getElementById(`chk-${type}-${x.key}`);
@@ -612,6 +611,10 @@ function selectVariant(type,key){
   const bL=blueVariants.find(x=>x.key===selBlue).name;
   const aL=amberVariants.find(x=>x.key===selAmber).name;
   document.getElementById('preview-tag').innerHTML=`Ember: ${eL} · Purple: ${pL} · Green: ${gL}<br>Grey: ${nL} · Blue: ${bL} · Amber: ${aL}`;
+  const colours={};
+  const activeSel={ember:selEmber,purple:selPurple,green:selGreen,grey:selGrey,blue:selBlue,amber:selAmber};
+  Object.entries(activeSel).forEach(([t,k])=>{const vv=typeConfig[t].variants().find(x=>x.key===k);if(vv)Object.entries(vv.steps).forEach(([s,h])=>colours[`--${prefixMap[t]}-${s}`]=h);});
+  localStorage.setItem('mittiColours',JSON.stringify(colours));
 }
 
 /* ─── DARK MODE TOGGLE ───────────────────────────────────────────────── */
@@ -632,6 +635,7 @@ renderVariantGroup('green-grid', greenVariants, 'green');
 renderVariantGroup('grey-grid',  greyVariants,  'grey');
 renderVariantGroup('blue-grid',  blueVariants,  'blue');
 renderVariantGroup('amber-grid', amberVariants, 'amber');
+(function(){const colours={};const activeSel={ember:selEmber,purple:selPurple,green:selGreen,grey:selGrey,blue:selBlue,amber:selAmber};Object.entries(activeSel).forEach(([t,k])=>{const vv=typeConfig[t].variants().find(x=>x.key===k);if(vv)Object.entries(vv.steps).forEach(([s,h])=>colours[`--${prefixMap[t]}-${s}`]=h);});localStorage.setItem('mittiColours',JSON.stringify(colours));})();
 </script>
 </body>
 </html>

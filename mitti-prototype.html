@@ -1258,8 +1258,8 @@ function baseOpts(dark) {
 
 function buildCharts() {
   const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-  const ember = '#D03820', moss = '#3A9E5A', neutral = dark ? '#666260' : '#BCBAB8';
-  const purple = dark ? '#6E68DA' : '#4A42C8', mossLight = dark ? '#3A9E5A' : '#6EB888';
+  const ember = cv('--negative-bar'), moss = cv('--positive-bar'), neutral = cv('--neutral-bar');
+  const purple = cv('--chart-purple'), mossLight = cv('--chart-moss');
 
   const rebuild = (id, cfg) => { if (charts[id]) charts[id].destroy(); charts[id] = new Chart(document.getElementById(id), cfg); };
 
@@ -1307,6 +1307,19 @@ function updateChartsTheme() { buildCharts(); }
 window.addEventListener('DOMContentLoaded', () => {
   // nothing to build at start — reporting is not the default screen
 });
+
+/* ─── PALETTE SYNC ───────────────────────────────────────────────────── */
+function applyMittiColours() {
+  const stored = localStorage.getItem('mittiColours');
+  if (!stored) return;
+  try {
+    const colours = JSON.parse(stored);
+    Object.entries(colours).forEach(([prop, val]) => document.documentElement.style.setProperty(prop, val));
+    if (Object.keys(charts).length > 0) updateChartsTheme();
+  } catch(e) {}
+}
+applyMittiColours();
+window.addEventListener('storage', e => { if (e.key === 'mittiColours') applyMittiColours(); });
 </script>
 </body>
 </html>
