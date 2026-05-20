@@ -220,34 +220,6 @@ svg{display:block;}
   <div class="ramp-grid" id="confirmed-ramps"></div>
 </section>
 
-<!-- ══════ DATA VIZ PALETTE ══════════════════════════════════════════ -->
-<div class="divider"></div>
-<section class="section">
-  <div class="sec-hd">
-    <div class="sec-label">Exploration</div>
-    <div class="sec-title">Data visualisation palette</div>
-    <div class="sec-desc">Blue (series 1) and amber (series 2) swatches update as you select variants below.</div>
-  </div>
-  <div class="ramp-grid">
-    <div>
-      <div class="ramp-info">
-        <span class="ramp-name" id="dv-blue-name">Azure blue</span>
-        <span class="ramp-tag">Series 1</span>
-        <span class="ramp-desc" id="dv-blue-desc">H ~215°</span>
-      </div>
-      <div class="dataviz-row" id="dv-blue-row"></div>
-    </div>
-    <div style="margin-top:16px">
-      <div class="ramp-info">
-        <span class="ramp-name" id="dv-amber-name">Golden amber</span>
-        <span class="ramp-tag">Series 2</span>
-        <span class="ramp-desc" id="dv-amber-desc">H ~40°</span>
-      </div>
-      <div class="dataviz-row" id="dv-amber-row"></div>
-    </div>
-  </div>
-</section>
-
 <!-- ══════ EMBER ══════════════════════════════════════════════════════ -->
 <div class="divider"></div>
 <section class="section">
@@ -385,6 +357,29 @@ svg{display:block;}
         <div style="display:flex;align-items:center;gap:12px">
           <div style="width:48px;height:48px;border-radius:50%;background:var(--ui-dan-soft);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--ui-danger);flex-shrink:0;transition:background .25s,color .25s">53%</div>
           <div><div style="font-size:12.5px;font-weight:600;color:var(--tx)">POS station</div><div style="font-size:11.5px;color:var(--tx-t)">Overdue review</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DATA VIZ PALETTE SWATCHES ── -->
+    <div class="pcard pcard-full">
+      <div class="pcard-title">Data visualisation palette</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div>
+          <div class="ramp-info" style="margin-bottom:6px;">
+            <span class="ramp-name" id="dv-blue-name">Azure blue</span>
+            <span class="ramp-tag">Series 1</span>
+            <span class="ramp-desc" id="dv-blue-desc">H ~215°</span>
+          </div>
+          <div class="dataviz-row" id="dv-blue-row"></div>
+        </div>
+        <div>
+          <div class="ramp-info" style="margin-bottom:6px;">
+            <span class="ramp-name" id="dv-amber-name">Golden amber</span>
+            <span class="ramp-tag">Series 2</span>
+            <span class="ramp-desc" id="dv-amber-desc">H ~40°</span>
+          </div>
+          <div class="dataviz-row" id="dv-amber-row"></div>
         </div>
       </div>
     </div>
