@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SafetyCulture — Mitti Colourway Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 /* ─── COLOUR TOKENS ──────────────────────────────────────────────────── */
@@ -54,7 +57,7 @@
 
 /* ─── RESET ─────────────────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:13px;line-height:1.4;background:var(--bg-page);color:var(--text-primary);transition:background .25s,color .25s;min-height:100vh;}
+body{font-family:'Geist',-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;line-height:20px;background:var(--bg-page);color:var(--text-primary);transition:background .25s,color .25s;min-height:100vh;}
 svg{display:block;}
 button{font-family:inherit;cursor:pointer;}
 .hidden{display:none!important;}
@@ -100,8 +103,8 @@ button{font-family:inherit;cursor:pointer;}
 
 /* ─── PAGE HEADER ───────────────────────────────────────────────────── */
 .pg-head{padding:18px 24px 0;flex-shrink:0;}
-.pg-title{font-size:20px;font-weight:680;color:var(--text-primary);letter-spacing:-.025em;}
-.pg-sub{font-size:12.5px;color:var(--text-secondary);margin-top:2px;}
+.pg-title{font-size:20px;font-weight:600;color:var(--text-primary);letter-spacing:0;line-height:24px;}
+.pg-sub{font-size:14px;line-height:20px;color:var(--text-secondary);margin-top:2px;}
 
 /* ─── SCROLLABLE AREA ───────────────────────────────────────────────── */
 .scroll{flex:1;overflow-y:auto;padding:16px 24px 32px;}
@@ -113,7 +116,7 @@ button{font-family:inherit;cursor:pointer;}
 .card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow);transition:background .25s,border-color .25s;}
 .card:hover{box-shadow:var(--shadow-md);}
 .card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px;}
-.card-head-title{font-size:13px;font-weight:575;color:var(--text-primary);}
+.card-head-title{font-size:14px;font-weight:600;color:var(--text-primary);line-height:20px;}
 .card-link{font-size:11.5px;color:var(--accent);cursor:pointer;}
 .card-link:hover{text-decoration:underline;}
 .card-menu-btn{color:var(--text-tertiary);padding:2px;border-radius:4px;cursor:pointer;border:none;background:transparent;}

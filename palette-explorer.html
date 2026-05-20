@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mitti Colourway — Palette Explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ─── FIXED REFERENCE TOKENS ─────────────────────────────────────────── */
 :root {
@@ -64,7 +67,7 @@
 
 /* ─── BASE ────────────────────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:13px;line-height:1.4;background:var(--bg);color:var(--tx);min-height:100vh;transition:background .25s,color .25s;}
+body{font-family:'Geist',-apple-system,BlinkMacSystemFont,sans-serif;font-size:14px;line-height:20px;background:var(--bg);color:var(--tx);min-height:100vh;transition:background .25s,color .25s;}
 svg{display:block;}
 
 /* ─── LAYOUT ─────────────────────────────────────────────────────────── */
@@ -72,8 +75,8 @@ svg{display:block;}
 
 /* ─── HEADER ─────────────────────────────────────────────────────────── */
 .hd{padding:32px 0 0;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
-.hd-title{font-size:21px;font-weight:700;letter-spacing:-.025em;color:var(--tx);}
-.hd-sub{font-size:13px;color:var(--tx-s);margin-top:3px;}
+.hd-title{font-size:24px;font-weight:600;letter-spacing:-.04em;color:var(--tx);line-height:28px;}
+.hd-sub{font-size:14px;line-height:20px;color:var(--tx-s);margin-top:3px;}
 .hd-actions{display:flex;align-items:center;gap:8px;flex-shrink:0;}
 .proto-link,.theme-toggle{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:7px;border:1.5px solid var(--brd-s);font-size:12.5px;color:var(--tx-s);text-decoration:none;white-space:nowrap;cursor:pointer;background:transparent;font-family:inherit;transition:border-color .15s,color .15s,background .15s;}
 .proto-link:hover,.theme-toggle:hover{border-color:var(--ui-accent);color:var(--ui-accent);}
@@ -81,9 +84,9 @@ svg{display:block;}
 /* ─── SECTION ────────────────────────────────────────────────────────── */
 .section{margin-top:44px;}
 .sec-hd{margin-bottom:18px;}
-.sec-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tx-t);}
-.sec-title{font-size:17px;font-weight:650;letter-spacing:-.02em;color:var(--tx);margin-top:2px;}
-.sec-desc{font-size:13px;color:var(--tx-s);margin-top:3px;}
+.sec-label{font-size:12px;font-weight:700;letter-spacing:.125em;text-transform:uppercase;color:var(--tx-t);line-height:16px;}
+.sec-title{font-size:20px;font-weight:600;letter-spacing:0;color:var(--tx);margin-top:4px;line-height:24px;}
+.sec-desc{font-size:14px;line-height:20px;color:var(--tx-s);margin-top:4px;}
 .divider{height:1px;background:var(--brd);margin-top:44px;transition:background .25s;}
 
 /* ─── PALETTE RAMPS ──────────────────────────────────────────────────── */
@@ -96,7 +99,7 @@ svg{display:block;}
 .sw{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:7px 8px;cursor:default;transition:flex .2s;}
 .sw:hover{flex:1.6;}
 .sw-step{font-size:10px;font-weight:700;letter-spacing:.02em;}
-.sw-hex{font-size:9.5px;font-family:'SF Mono','Fira Code',monospace;margin-top:1px;opacity:.75;}
+.sw-hex{font-size:9.5px;font-family:'Geist Mono','SF Mono',monospace;margin-top:1px;opacity:.75;}
 .sw-badge{font-size:8.5px;font-weight:700;padding:1px 5px;border-radius:3px;margin-top:3px;display:inline-block;}
 .wcag-aaa{background:rgba(26,90,48,.18);color:#1A5A30;}
 .wcag-aa{background:rgba(26,58,106,.18);color:#1A3A6A;}
@@ -116,8 +119,8 @@ svg{display:block;}
 .vcard.sel-blue  {border-color:var(--ui-blue);  box-shadow:0 0 0 3px color-mix(in srgb,var(--ui-blue)   14%,transparent);}
 .vcard.sel-amber {border-color:var(--ui-amber); box-shadow:0 0 0 3px color-mix(in srgb,var(--ui-amber)  14%,transparent);}
 .vcard-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;}
-.vcard-name{font-size:13px;font-weight:650;color:var(--tx);}
-.vcard-hue{font-size:11px;color:var(--tx-t);font-family:'SF Mono','Fira Code',monospace;margin-top:2px;}
+.vcard-name{font-size:14px;font-weight:600;color:var(--tx);line-height:20px;}
+.vcard-hue{font-size:12px;line-height:16px;color:var(--tx-t);font-family:'Geist Mono','SF Mono',monospace;margin-top:2px;}
 .check{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border .2s;}
 .check.on-purple{background:var(--ui-accent);}
 .check.on-green {background:var(--ui-pos);}
@@ -139,7 +142,7 @@ svg{display:block;}
 .preview-variant-tag{font-size:11.5px;color:var(--tx-s);background:var(--bg-raise);padding:6px 14px;border-radius:20px;border:1px solid var(--brd);flex-shrink:0;text-align:right;line-height:1.7;transition:background .25s,border-color .25s,color .25s;}
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .pcard{background:var(--bg-card);border:1px solid var(--brd);border-radius:10px;padding:16px;transition:background .25s,border-color .25s;}
-.pcard-title{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tx-t);margin-bottom:14px;}
+.pcard-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.125em;line-height:16px;color:var(--tx-t);margin-bottom:14px;}
 .pcard-full{grid-column:1/-1;}
 
 /* Preview components */
