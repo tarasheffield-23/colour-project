@@ -344,38 +344,49 @@ button{font-family:inherit;cursor:pointer;}
     <div class="logo-mark">M</div>
   </div>
   <nav class="sidebar-nav">
+    <!-- Home -->
     <div class="nav-item active" data-screen="home" onclick="showScreen('home')" title="Home">
-      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6.5L8 2l6 4.5V14H2V6.5z"/></svg>
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7L8 2l6 5v7H2V7z"/><path d="M6 14v-5h4v5"/></svg>
     </div>
+    <!-- Templates: overlapping pages -->
     <div class="nav-item" data-screen="none" title="Templates">
-      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1.5"/><path d="M5 6h6M5 9h4"/></svg>
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="9" height="10" rx="1.5"/><path d="M4 4V3a1 1 0 011-1h6a1 1 0 011 1v1"/><path d="M2 6h2M2 9h2M2 12h2"/></svg>
     </div>
+    <!-- Inspections: clipboard with checkmark lines -->
     <div class="nav-item" data-screen="none" title="Inspections">
-      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 2H5a1 1 0 00-1 1v10a1 1 0 001 1h6a1 1 0 001-1V3a1 1 0 00-1-1z"/><path d="M5.5 5.5h5M5.5 8h5M5.5 10.5h3"/></svg>
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3.5" width="10" height="11" rx="1.5"/><path d="M6 3.5V2.5a1 1 0 011-1h2a1 1 0 011 1v1"/><path d="M5.5 7.5l1.5 1.5 2.5-2.5M5.5 11h5"/></svg>
     </div>
+    <!-- Issues: flag -->
     <div class="nav-item" data-screen="issues" onclick="showScreen('issues')" title="Issues">
-      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5.5v3M8 10.5v.5"/></svg>
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 14V3M4 3h8l-2.5 3.5L12 10H4"/></svg>
     </div>
+    <!-- Schedules: calendar -->
     <div class="nav-item" data-screen="none" title="Schedules">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="11" rx="1.5"/><path d="M5 2v2M11 2v2M2 7h12"/></svg>
     </div>
+    <!-- Actions: lightning bolt -->
     <div class="nav-item" data-screen="actions" onclick="showScreen('actions')" title="Actions">
-      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5l2 2"/></svg>
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="currentColor" stroke="none"><path d="M9.5 2L4 9h4.5l-2 5 7-7H9l2.5-5H9.5z"/></svg>
     </div>
+    <!-- Training: graduation cap -->
     <div class="nav-item" data-screen="none" title="Training">
-      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7l6-4 6 4-6 4z"/><path d="M5 9.5V13h6v-3.5M13 7v4"/></svg>
     </div>
+    <!-- Insights/Analytics: bar chart -->
     <div class="nav-item" data-screen="insights" onclick="showScreen('insights')" title="Insights">
       <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="8" width="3" height="6" rx=".75"/><rect x="6.5" y="4" width="3" height="10" rx=".75"/><rect x="11" y="1" width="3" height="13" rx=".75"/></svg>
     </div>
+    <!-- Locations: map pin -->
     <div class="nav-item" data-screen="none" title="Locations">
-      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3M8 11v.5"/></svg>
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1.5A4 4 0 0112 5.5c0 4-4 9-4 9s-4-5-4-9a4 4 0 014-4z"/><circle cx="8" cy="5.5" r="1.5"/></svg>
     </div>
+    <!-- Assets: 3D cube -->
     <div class="nav-item" data-screen="none" title="Assets">
-      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2l5.5 3v6L8 14 2.5 11V5z"/><path d="M8 2v6M2.5 5l5.5 3 5.5-3"/></svg>
     </div>
+    <!-- People: person -->
     <div class="nav-item" data-screen="none" title="People">
-      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="6" r="2.5"/><path d="M3 13c0-2.76 2.24-5 5-5s5 2.24 5 5"/></svg>
+      <svg class="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="5.5" r="2.5"/><path d="M3 14c0-2.76 2.24-5 5-5s5 2.24 5 5"/></svg>
     </div>
   </nav>
   <div class="sidebar-footer">
