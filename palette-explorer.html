@@ -361,29 +361,6 @@ svg{display:block;}
     <div class="vgrid" id="amber-grid"></div>
   </div>
   <div class="pgrid">
-    <!-- ── DATA VIZ PALETTE SWATCHES ── -->
-    <div class="pcard pcard-full">
-      <div class="pcard-title">Data visualisation palette</div>
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <div>
-          <div class="ramp-info" style="margin-bottom:6px;">
-            <span class="ramp-name" id="dv-blue-name">Azure blue</span>
-            <span class="ramp-tag">Series 1</span>
-            <span class="ramp-desc" id="dv-blue-desc">H ~215°</span>
-          </div>
-          <div class="dataviz-row" id="dv-blue-row"></div>
-        </div>
-        <div>
-          <div class="ramp-info" style="margin-bottom:6px;">
-            <span class="ramp-name" id="dv-amber-name">Golden amber</span>
-            <span class="ramp-tag">Series 2</span>
-            <span class="ramp-desc" id="dv-amber-desc">H ~40°</span>
-          </div>
-          <div class="dataviz-row" id="dv-amber-row"></div>
-        </div>
-      </div>
-    </div>
-
     <!-- ── DATA VIZ CHART — full width, 3 series × 6 sites ── -->
     <div class="pcard pcard-full">
       <div class="pcard-title">Data visualisation — inspections by site (blue · amber · green)</div>
@@ -522,13 +499,6 @@ function renderPalette(){
   });
 }
 
-/* ─── RENDER DATA VIZ RAMPS ──────────────────────────────────────────── */
-function renderDataVizRamps(){
-  ['blue','amber'].forEach(t=>{
-    const el=document.getElementById(`dv-${t}-row`);
-    if(el)el.innerHTML=['50','100','200','300','400','500','600','700','800','900'].map(s=>`<div class="dvsw" style="background:var(--${t}-${s})"></div>`).join('');
-  });
-}
 
 /* ─── VARIANT STATE ──────────────────────────────────────────────────── */
 let selEmber='confirmed',selPurple='confirmed',selGreen='moss',selGrey='warm',selBlue='azure',selAmber='golden';
@@ -590,8 +560,6 @@ function selectVariant(type,key){
     if(card){card.classList.remove('sel','sel-green','sel-grey','sel-blue','sel-amber');if(on)card.classList.add(cfg.selClass);}
     if(chk){chk.className=`check ${on?cfg.checkClass:'off'}`;chk.innerHTML=on?`<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="2.2"><path d="M2 5l2.5 2.5 3.5-4"/></svg>`:'';}
   });
-  if(type==='blue'){document.getElementById('dv-blue-name').textContent=v.name;document.getElementById('dv-blue-desc').textContent=v.hue;}
-  if(type==='amber'){document.getElementById('dv-amber-name').textContent=v.name;document.getElementById('dv-amber-desc').textContent=v.hue;}
   const eL=emberVariants.find(x=>x.key===selEmber).name;
   const pL=purpleVariants.find(x=>x.key===selPurple).name;
   const gL=greenVariants.find(x=>x.key===selGreen).name;
@@ -657,7 +625,7 @@ function toggleTheme(){
 
 /* ─── INIT ───────────────────────────────────────────────────────────── */
 renderPalette();
-renderDataVizRamps();
+
 renderVariantGroup('ember-grid', emberVariants, 'ember');
 renderVariantGroup('purple-grid',purpleVariants,'purple');
 renderVariantGroup('green-grid', greenVariants, 'green');
