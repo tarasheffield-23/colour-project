@@ -196,6 +196,10 @@ svg{display:block;}
       </svg>
       <span id="theme-label">Dark mode</span>
     </button>
+    <button class="proto-link" onclick="exportForFigma()" title="Download colours as Figma Variables JSON">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v8M4 6l3 3 3-3M2 11h10"/></svg>
+      Export for Figma
+    </button>
     <a class="proto-link" href="mitti-prototype.html">
       <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="10" height="10" rx="2"/><path d="M5 7h4M7 5v4"/></svg>
       Open prototype
@@ -615,6 +619,47 @@ function selectVariant(type,key){
   const activeSel={ember:selEmber,purple:selPurple,green:selGreen,grey:selGrey,blue:selBlue,amber:selAmber};
   Object.entries(activeSel).forEach(([t,k])=>{const vv=typeConfig[t].variants().find(x=>x.key===k);if(vv)Object.entries(vv.steps).forEach(([s,h])=>colours[`--${prefixMap[t]}-${s}`]=h);});
   localStorage.setItem('mittiColours',JSON.stringify(colours));
+}
+
+/* ─── EXPORT FOR FIGMA ───────────────────────────────────────────────── */
+function exportForFigma() {
+  const activeSel = {ember:selEmber,purple:selPurple,green:selGreen,grey:selGrey,blue:selBlue,amber:selAmber};
+  const tokens = {};
+  Object.entries(activeSel).forEach(([type, key]) => {
+    const vv = typeConfig[type].variants().find(x => x.key === key);
+    if (!vv) return;
+    const prefix = prefixMap[type];
+    tokens[prefix] = {};
+    Object.entries(vv.steps).forEach(([step, hex]) => {
+      tokens[prefix][step] = {value: hex, type: 'color'};
+    });
+  });
+  const json = JSON.stringify(tokens, null, 2);
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([json], {type:'application/json'}));
+  a.download = 'mitti-colours.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  showToast('mitti-colours.json downloaded — import via Tokens Studio plugin in Figma');
+}
+
+function showToast(msg) {
+  let t = document.getElementById('export-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'export-toast';
+    t.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--neutral-800);color:#fff;padding:9px 18px;border-radius:8px;font-size:12px;font-family:inherit;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;z-index:9999;white-space:nowrap;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  t.style.transform = 'translateX(-50%) translateY(0)';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => {
+    t.style.opacity = '0';
+    t.style.transform = 'translateX(-50%) translateY(8px)';
+  }, 3500);
 }
 
 /* ─── DARK MODE TOGGLE ───────────────────────────────────────────────── */
