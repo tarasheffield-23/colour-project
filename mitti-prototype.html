@@ -248,6 +248,31 @@ button{font-family:inherit;cursor:pointer;}
 .ai-sug-row:hover{background:var(--bg-hover);}
 .ai-sug-row svg{color:var(--text-tertiary);flex-shrink:0;}
 
+/* ─── BENCHMARKING ──────────────────────────────────────────────────── */
+.bench-inner-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:16px;flex-shrink:0;transition:border-color .25s;}
+.bench-inner-tab{padding:8px 14px;font-size:13px;color:var(--text-secondary);border-bottom:2.5px solid transparent;cursor:pointer;transition:all .15s;margin-bottom:-1px;user-select:none;}
+.bench-inner-tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:550;}
+.bench-kpi-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+.bench-kpi{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:var(--shadow);transition:background .25s,border-color .25s;}
+.bench-kpi-hd{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.bench-kpi-ico{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.bench-kpi-title{font-size:14px;font-weight:650;color:var(--text-primary);}
+.bench-site-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);}
+.bench-site-row:last-child{border-bottom:none;}
+.bench-site-ico{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.bench-site-info{flex:1;min-width:0;}
+.bench-site-name{font-size:12px;font-weight:500;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bench-site-pct{font-size:10.5px;color:var(--text-tertiary);}
+.bench-stars{font-size:12px;letter-spacing:0px;}
+.bench-score{font-size:12.5px;font-weight:650;width:30px;text-align:right;flex-shrink:0;}
+.bench-map-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.bench-view-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:6px;font-size:12.5px;cursor:pointer;border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);font-family:inherit;transition:all .15s;}
+.bench-view-btn.active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);}
+.bench-map-wrap{border-radius:12px;overflow:hidden;border:1px solid var(--border);position:relative;height:300px;}
+.bench-map-ctrl{position:absolute;right:12px;top:12px;display:flex;flex-direction:column;gap:4px;z-index:1;}
+.bench-map-btn{width:30px;height:30px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-secondary);font-family:inherit;font-size:16px;font-weight:300;transition:background .15s;}
+.bench-map-btn:hover{background:var(--bg-hover);}
+
 /* ─── ACTIONS KANBAN ─────────────────────────────────────────────────── */
 .kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
 .k-col{display:flex;flex-direction:column;}
@@ -658,6 +683,7 @@ button{font-family:inherit;cursor:pointer;}
     <div class="subnav">
       <div class="sntab active" id="sn-ai" onclick="showInsightsTab('ai')">AI Assistant</div>
       <div class="sntab" id="sn-rep" onclick="showInsightsTab('reporting')">Reporting</div>
+      <div class="sntab" id="sn-bench" onclick="showInsightsTab('bench')">Benchmarking</div>
     </div>
 
     <!-- AI tab -->
@@ -798,6 +824,169 @@ button{font-family:inherit;cursor:pointer;}
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ BENCHMARKING ═════════════════════════════════════ -->
+  <div id="insights-bench" class="hidden" style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
+    <div class="scroll" style="padding:24px 24px 32px;">
+      <!-- Header -->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:22px;font-weight:700;color:var(--text-primary);letter-spacing:-.025em;">Site Benchmarking</div>
+        <div style="font-size:13px;color:var(--text-secondary);margin-top:3px;">5-star performance ranking across your site network</div>
+      </div>
+      <!-- Inner tabs -->
+      <div class="bench-inner-tabs">
+        <div class="bench-inner-tab active">Overview</div>
+        <div class="bench-inner-tab">Configuration</div>
+      </div>
+      <!-- Filters -->
+      <div style="display:flex;gap:8px;margin-bottom:16px;">
+        <div class="fchip">Timeframe: 7 days<span class="fchip-caret" style="margin-left:4px;">▾</span></div>
+        <div class="fchip">Site: All<span class="fchip-caret" style="margin-left:4px;">▾</span></div>
+      </div>
+      <!-- KPI cards -->
+      <div class="bench-kpi-grid">
+        <!-- On track -->
+        <div class="bench-kpi">
+          <div class="bench-kpi-hd">
+            <div class="bench-kpi-ico" style="background:var(--positive-soft)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--positive)" stroke-width="2"><path d="M2 11l4-5 3 3 5-7"/></svg></div>
+            <div class="bench-kpi-title">On track</div>
+          </div>
+          <div class="bench-site-row">
+            <div class="bench-site-ico" style="background:var(--positive-soft)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="var(--positive)" stroke-width="1.5"><path d="M6 1l1.2 3.6H11L8.2 7l1.2 3.6L6 8.6l-3.2 2L4.2 7 1.2 4.6H5Z"/></svg></div>
+            <div class="bench-site-info"><div class="bench-site-name">!! Time Team Test Site</div><div class="bench-site-pct">72% of criteria met</div></div>
+            <div class="bench-stars"><span style="color:var(--positive)">★★★★</span><span style="color:var(--neutral-300)">★</span></div>
+            <div class="bench-score" style="color:var(--positive)">3.60</div>
+          </div>
+          <div class="bench-site-row">
+            <div class="bench-site-ico" style="background:var(--positive-soft)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="var(--positive)" stroke-width="1.5"><path d="M6 1l1.2 3.6H11L8.2 7l1.2 3.6L6 8.6l-3.2 2L4.2 7 1.2 4.6H5Z"/></svg></div>
+            <div class="bench-site-info"><div class="bench-site-name">(Rochelle) Site</div><div class="bench-site-pct">72% of criteria met</div></div>
+            <div class="bench-stars"><span style="color:var(--positive)">★★★★</span><span style="color:var(--neutral-300)">★</span></div>
+            <div class="bench-score" style="color:var(--positive)">3.60</div>
+          </div>
+          <div class="bench-site-row">
+            <div class="bench-site-ico" style="background:var(--positive-soft)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="var(--positive)" stroke-width="1.5"><path d="M6 1l1.2 3.6H11L8.2 7l1.2 3.6L6 8.6l-3.2 2L4.2 7 1.2 4.6H5Z"/></svg></div>
+            <div class="bench-site-info"><div class="bench-site-name">* Example site (A)</div><div class="bench-site-pct">72% of criteria met</div></div>
+            <div class="bench-stars"><span style="color:var(--positive)">★★★★</span><span style="color:var(--neutral-300)">★</span></div>
+            <div class="bench-score" style="color:var(--positive)">3.60</div>
+          </div>
+        </div>
+        <!-- Needs attention -->
+        <div class="bench-kpi">
+          <div class="bench-kpi-hd">
+            <div class="bench-kpi-ico" style="background:var(--ui-amb-soft,#FDF8F0)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--ui-amber,#A86010)" stroke-width="1.8"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5M8 10.5v.5"/></svg></div>
+            <div class="bench-kpi-title">Needs attention</div>
+          </div>
+          <div class="bench-site-row">
+            <div class="bench-site-ico" style="background:var(--negative-soft)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="var(--negative)" stroke-width="1.5"><path d="M6 1l1.2 3.6H11L8.2 7l1.2 3.6L6 8.6l-3.2 2L4.2 7 1.2 4.6H5Z"/></svg></div>
+            <div class="bench-site-info"><div class="bench-site-name">Wayne Site</div><div class="bench-site-pct">21% of criteria met</div></div>
+            <div class="bench-stars"><span style="color:var(--negative)">★</span><span style="color:var(--neutral-300)">★★★★</span></div>
+            <div class="bench-score" style="color:var(--negative)">1.05</div>
+          </div>
+          <div class="bench-site-row">
+            <div class="bench-site-ico" style="background:var(--negative-soft)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="var(--negative)" stroke-width="1.5"><path d="M6 1l1.2 3.6H11L8.2 7l1.2 3.6L6 8.6l-3.2 2L4.2 7 1.2 4.6H5Z"/></svg></div>
+            <div class="bench-site-info"><div class="bench-site-name">Site Do NOT Remove</div><div class="bench-site-pct">34% of criteria met</div></div>
+            <div class="bench-stars"><span style="color:var(--negative)">★★</span><span style="color:var(--neutral-300)">★★★</span></div>
+            <div class="bench-score" style="color:var(--negative)">1.70</div>
+          </div>
+          <div class="bench-site-row">
+            <div class="bench-site-ico" style="background:var(--negative-soft)"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="var(--negative)" stroke-width="1.5"><path d="M6 1l1.2 3.6H11L8.2 7l1.2 3.6L6 8.6l-3.2 2L4.2 7 1.2 4.6H5Z"/></svg></div>
+            <div class="bench-site-info"><div class="bench-site-name">Wayne Site 2</div><div class="bench-site-pct">38% of criteria met</div></div>
+            <div class="bench-stars"><span style="color:var(--negative)">★★</span><span style="color:var(--neutral-300)">★★★</span></div>
+            <div class="bench-score" style="color:var(--negative)">1.90</div>
+          </div>
+        </div>
+        <!-- Sites average -->
+        <div class="bench-kpi" style="display:flex;flex-direction:column;">
+          <div class="bench-kpi-hd">
+            <div class="bench-kpi-ico" style="background:var(--accent-soft)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M8 1.5l1.6 4.8H14l-4.1 3 1.6 4.8L8 11.2l-4.1 2.9 1.6-4.8L1.4 6.3H6.4z"/></svg></div>
+            <div class="bench-kpi-title">Sites average</div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0;">
+            <div style="font-size:48px;font-weight:750;letter-spacing:-.04em;color:var(--text-primary);line-height:1;">3.60</div>
+            <div style="font-size:22px;letter-spacing:2px;margin:8px 0 4px;"><span style="color:var(--positive)">★★★★</span><span style="color:var(--neutral-300)">★</span></div>
+            <div style="font-size:11.5px;color:var(--text-tertiary);">across your 17,003 sites</div>
+          </div>
+        </div>
+      </div>
+      <!-- Map bar -->
+      <div class="bench-map-bar">
+        <div style="display:flex;gap:0;">
+          <button class="bench-view-btn active" style="border-radius:6px 0 0 6px;border-right:none;">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 3l4 1.5L9 2l4 2v7l-4-2-4 1.5L1 9z"/></svg>
+            Map
+          </button>
+          <button class="bench-view-btn" style="border-radius:0 6px 6px 0;">
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h10M2 7h10M2 10h7"/></svg>
+            List
+          </button>
+        </div>
+        <span style="font-size:12px;color:var(--text-tertiary);">1000 of 17003 sites</span>
+      </div>
+      <!-- Map -->
+      <div class="bench-map-wrap">
+        <div class="bench-map-ctrl">
+          <button class="bench-map-btn" title="Expand"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 1h4v4M5 13H1V9M14 1l-5 5M1 13l5-5"/></svg></button>
+          <button class="bench-map-btn">+</button>
+          <button class="bench-map-btn">−</button>
+          <button class="bench-map-btn" title="Layers"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5l6-3 6 3-6 3z"/><path d="M1 9l6 3 6-3"/></svg></button>
+        </div>
+        <svg viewBox="0 0 1000 300" style="width:100%;height:100%;display:block" xmlns="http://www.w3.org/2000/svg">
+          <rect width="1000" height="300" fill="#c8e4f0"/>
+          <line x1="0" y1="150" x2="1000" y2="150" stroke="#b0cfe0" stroke-width="0.5"/>
+          <line x1="500" y1="0" x2="500" y2="300" stroke="#b0cfe0" stroke-width="0.5"/>
+          <!-- North America -->
+          <path d="M 28 57 L 80 36 L 180 29 L 260 41 L 292 67 L 290 93 L 265 119 L 238 150 L 208 162 L 175 159 L 130 149 L 65 117 L 28 89Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- Greenland -->
+          <path d="M 190 13 L 280 10 L 292 29 L 262 39 L 198 35Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- Central America -->
+          <path d="M 208 163 L 252 156 L 262 174 L 230 179Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- South America -->
+          <path d="M 196 185 L 270 173 L 320 187 L 342 222 L 318 264 L 260 275 L 205 263 L 178 237 L 182 209Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- UK -->
+          <path d="M 432 47 L 458 43 L 462 59 L 440 61Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- Continental Europe -->
+          <path d="M 460 39 L 570 33 L 585 53 L 578 78 L 548 89 L 492 89 L 462 77 L 452 59Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- Scandinavia -->
+          <path d="M 480 17 L 542 13 L 555 35 L 522 41 L 488 37Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- Russia + N Asia -->
+          <path d="M 562 17 L 968 8 L 972 53 L 878 65 L 810 61 L 748 71 L 688 67 L 625 77 L 582 73 L 565 55Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- Middle East -->
+          <path d="M 562 79 L 658 71 L 695 93 L 685 121 L 635 131 L 578 125 L 558 105Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- India -->
+          <path d="M 648 77 L 735 71 L 765 95 L 752 127 L 705 145 L 658 131 L 640 103Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- East Asia -->
+          <path d="M 738 61 L 898 55 L 918 91 L 875 107 L 822 113 L 772 113 L 735 103 L 718 83Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- Japan -->
+          <path d="M 886 61 L 928 57 L 935 75 L 905 81Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- SE Asia -->
+          <path d="M 735 113 L 818 109 L 842 133 L 808 155 L 765 157 L 738 145Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- SE Asia islands -->
+          <path d="M 808 156 L 878 151 L 912 167 L 875 177 L 825 173Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- Africa -->
+          <path d="M 458 91 L 578 83 L 622 103 L 635 156 L 605 215 L 560 245 L 495 247 L 450 227 L 435 185 L 442 137Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- Madagascar -->
+          <path d="M 612 189 L 640 183 L 645 217 L 618 221Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- Australia -->
+          <path d="M 768 177 L 912 169 L 952 195 L 942 245 L 882 255 L 798 251 L 762 225 L 758 195Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- New Zealand -->
+          <path d="M 952 229 L 972 219 L 982 239 L 958 245Z" fill="#c4d8a8" stroke="#8ab06a" stroke-width="0.8"/>
+          <!-- Antarctica -->
+          <path d="M 0 289 L 1000 289 L 1000 300 L 0 300Z" fill="#e0e8e8"/>
+          <!-- Site dots -->
+          <circle cx="155" cy="93" r="3" fill="var(--accent)" opacity="0.8"/>
+          <circle cx="510" cy="66" r="3" fill="var(--accent)" opacity="0.8"/>
+          <circle cx="210" cy="216" r="3" fill="var(--accent)" opacity="0.8"/>
+          <circle cx="690" cy="93" r="3" fill="var(--accent)" opacity="0.8"/>
+          <circle cx="520" cy="144" r="3" fill="var(--accent)" opacity="0.8"/>
+          <circle cx="850" cy="90" r="3" fill="var(--accent)" opacity="0.8"/>
+          <circle cx="830" cy="213" r="3" fill="var(--accent)" opacity="0.8"/>
+          <circle cx="290" cy="120" r="3" fill="var(--accent)" opacity="0.8"/>
+          <circle cx="480" cy="110" r="3" fill="var(--accent)" opacity="0.8"/>
+          <circle cx="650" cy="200" r="3" fill="var(--accent)" opacity="0.8"/>
+        </svg>
       </div>
     </div>
   </div>
@@ -1187,18 +1376,24 @@ function showInsightsTab(tab) {
   currentInsightsTab = tab;
   const aiEl = document.getElementById('insights-ai');
   const repEl = document.getElementById('insights-reporting');
+  const benchEl = document.getElementById('insights-bench');
+  aiEl.style.display = 'none';
+  repEl.style.display = 'none'; repEl.classList.add('hidden');
+  if (benchEl) { benchEl.style.display = 'none'; benchEl.classList.add('hidden'); }
+  document.getElementById('sn-ai').classList.remove('active');
+  document.getElementById('sn-rep').classList.remove('active');
+  document.getElementById('sn-bench').classList.remove('active');
   if (tab === 'ai') {
     aiEl.style.display = 'flex'; aiEl.style.flexDirection = 'column';
-    repEl.classList.add('hidden');
     document.getElementById('sn-ai').classList.add('active');
-    document.getElementById('sn-rep').classList.remove('active');
-  } else {
-    aiEl.style.display = 'none';
+  } else if (tab === 'reporting') {
     repEl.style.display = 'flex'; repEl.style.flexDirection = 'column';
     repEl.classList.remove('hidden');
-    document.getElementById('sn-ai').classList.remove('active');
     document.getElementById('sn-rep').classList.add('active');
     buildCharts();
+  } else if (tab === 'bench') {
+    if (benchEl) { benchEl.style.display = 'flex'; benchEl.style.flexDirection = 'column'; benchEl.classList.remove('hidden'); }
+    document.getElementById('sn-bench').classList.add('active');
   }
 }
 
